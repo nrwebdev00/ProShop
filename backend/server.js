@@ -1,8 +1,12 @@
 import express from 'express'
 import Keys from '../Keys.js';
 import products from './data/products.js'
+import colors from 'colors';
+
+import db from './config/db.js';
 
 
+db();
 
 const app = express()
 
@@ -23,5 +27,5 @@ const PORT = Keys.PORT || 5000
 
 app.listen(
   PORT,
-  console.log(`Server running in ${Keys.NODE_ENV} mode and on port ${PORT}`)
+  console.log(`Server running on port${PORT} in ${Keys.NODE_ENV} mode.`.brightYellow.underline.bold)
 )
