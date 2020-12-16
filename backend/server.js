@@ -13,6 +13,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 //Routes Imports
 import productRoutes from './routes/productRoutes.js';
 import usersRoutes from './routes/userRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 
 db();
 const app = express();
@@ -33,7 +34,8 @@ app.use(bodyParser.urlencoded({
 //Mount Routes
 app.get('/', (req, res) => { res.send('API is running....')}) //Test Route to ensure server is running
 app.use('/api/products', productRoutes);
-app.use('/api/users', usersRoutes)
+app.use('/api/users', usersRoutes);
+app.use('/api/order', orderRoutes);
 
 //Error Middleware
 app.use(notFound);
