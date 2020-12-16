@@ -1,24 +1,39 @@
-import express from 'express'
-import Keys from '../Keys.js';
+import express from 'express';
+import bodyParser from 'body-parser';
 import colors from 'colors';
 import morgan from 'morgan';
+
+//Config Imports
+import Keys from '../Keys.js';
 import db from './config/db.js';
-import productRoutes from './routes/productRoutes.js';
+
+//Middleware Imports
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
+//Routes Imports
+import productRoutes from './routes/productRoutes.js';
+import usersRoutes from './routes/userRoutes.js';
 
 db();
+const app = express();
 
-const app = express()
+
+//Logging DEV
+if(Keys.NODE_ENV === "development"){
+  app.use(morgan("dev"));
+}
+
+//Parser
 app.use(express.json())
-
-app.get('/', (req, res) => {
-  res.send('API is running....')
-})
+app.use(bodyParser.urlencoded({
+  extended: false
+}))
 
 
 //Mount Routes
+app.get('/', (req, res) => { res.send('API is running....')}) //Test Route to ensure server is running
 app.use('/api/products', productRoutes);
+app.use('/api/users', usersRoutes)
 
 //Error Middleware
 app.use(notFound);
