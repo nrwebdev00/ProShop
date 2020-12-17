@@ -35,7 +35,12 @@ app.use(bodyParser.urlencoded({
 app.get('/', (req, res) => { res.send('API is running....')}) //Test Route to ensure server is running
 app.use('/api/products', productRoutes);
 app.use('/api/users', usersRoutes);
-app.use('/api/order', orderRoutes);
+app.use('/api/orders', orderRoutes);
+
+//Config Routes
+app.get('/api/config/paypal', (req, res) => 
+  res.send(Keys.PAYPAL_CLIENT_ID)
+)
 
 //Error Middleware
 app.use(notFound);
