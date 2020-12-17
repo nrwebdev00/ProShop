@@ -17,6 +17,7 @@ import ShippingPage from './Pages/ShippingPage';
 import PaymentPage from './Pages/PaymentPage';
 import PlaceOrderPage from './Pages/PlaceOrderPage';
 import OrderPage from './Pages/OrderPage';
+import UserListPage from './Pages/UserListPage';
 
 const App = () =>{
   return(
@@ -34,6 +35,7 @@ const App = () =>{
          <Route path='/login' component={LoginPage} />
          <Route path='/register' component={RegisterPage} />
          <Route path='/profile' component={ProfilePage} />
+         <Route path='/admin/userlist' component={UserListPage} />
          <Route path='/' component={HomePage} exact />
         </Container>
       </main>
