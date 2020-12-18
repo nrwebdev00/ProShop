@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
 import colors from 'colors';
@@ -14,6 +15,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import productRoutes from './routes/productRoutes.js';
 import usersRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 
 db();
 const app = express();
@@ -36,11 +38,16 @@ app.get('/', (req, res) => { res.send('API is running....')}) //Test Route to en
 app.use('/api/products', productRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/upload', uploadRoutes);
 
 //Config Routes
 app.get('/api/config/paypal', (req, res) => 
   res.send(Keys.PAYPAL_CLIENT_ID)
 )
+
+//Static folder path
+const __dirname = path.resolve()
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 //Error Middleware
 app.use(notFound);
