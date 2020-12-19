@@ -11,10 +11,12 @@ node_modules
 
 # production
 /build
+/frontend/build
 
 # misc
 .DS_Store
 Keys.js
+/backend/.env
 .env
 .env.local
 .env.development.local
