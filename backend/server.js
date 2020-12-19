@@ -5,7 +5,6 @@ import colors from 'colors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 //Config Imports
-import Keys from '../Keys.js';
 import db from './config/db.js';
 
 //Middleware Imports
@@ -20,11 +19,12 @@ import uploadRoutes from './routes/uploadRoutes.js';
 dotenv.config()
 
 db();
+
 const app = express();
 
 
 //Logging DEV
-if(Keys.NODE_ENV === "development"){
+if(process.env.NODE_ENV === "development"){
   app.use(morgan("dev"));
 }
 
@@ -63,9 +63,11 @@ if (process.env.NODE_ENV === 'production') {
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = Keys.PORT || 5000
+const PORT = process.env.PORT || 5000
 
 app.listen(
   PORT,
-  console.log(`Server running on port${PORT} in ${Keys.NODE_ENV} mode.`.brightYellow.underline.bold)
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+  )
 )
