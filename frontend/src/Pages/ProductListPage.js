@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import Paginate from '../components/Paginate';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { listProducts, deleteProduct, createProduct } from '../actions/productActions';
@@ -13,7 +14,7 @@ const ProductListPage = ({ history, match}) => {
   const dispatch = useDispatch()
 
   const productList = useSelector((state) => state.productList)
-  const { loading, error, products} = productList
+  const { loading, error, products, page, pages} = productList
 
   const productDelete = useSelector((state) => state.productDelete)
   const {
@@ -124,6 +125,11 @@ const ProductListPage = ({ history, match}) => {
               ))}
             </tbody>
           </Table>
+          <Paginate
+            pages={pages}
+            page={page}
+            isAdmin={userInfo.isAdmin}
+          />
         </>
       )}
     </>
